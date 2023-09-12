@@ -1,47 +1,54 @@
 package book.store.repository.impl;
 
-import book.store.exception.DataProcessingException;
+import book.store.exception.EntityNotFoundException;
 import book.store.model.Book;
 import book.store.repository.BookRepository;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.EntityTransaction;
 import java.util.List;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
-import org.springframework.beans.factory.annotation.Autowired;
+import java.util.Optional;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
+@RequiredArgsConstructor
 @Repository
 public class BookRepositoryImpl implements BookRepository {
-    private final SessionFactory sessionFactory;
-
-    @Autowired
-    public BookRepositoryImpl(SessionFactory sessionFactory) {
-        this.sessionFactory = sessionFactory;
-    }
+    private final EntityManagerFactory managerFactory;
 
     @Override
     public Book save(Book book) {
-        Transaction transaction = null;
+        EntityTransaction transaction = null;
 
-        try (Session session = sessionFactory.openSession()) {
-            transaction = session.beginTransaction();
-            session.persist(book);
+        try (EntityManager manager = managerFactory.createEntityManager()) {
+            transaction = manager.getTransaction();
+            transaction.begin();
+            manager.persist(book);
             transaction.commit();
         } catch (Exception e) {
-            if (transaction != null) {
+            if (transaction != null && transaction.isActive()) {
                 transaction.rollback();
             }
-            throw new DataProcessingException("Can't save " + book + " to DB", e);
+            throw new EntityNotFoundException("Can't save " + book + " to DB", e);
         }
         return book;
     }
 
     @Override
-    public List<Book> findAll() {
-        try (Session session = sessionFactory.openSession()) {
-            return session.createQuery("FROM Book ").getResultList();
+    public Optional<Book> findBookById(Long id) {
+        try (EntityManager manager = managerFactory.createEntityManager()) {
+            return Optional.ofNullable(manager.find(Book.class, id));
         } catch (Exception e) {
-            throw new DataProcessingException("Can't find books from DB", e);
+            throw new EntityNotFoundException("Can't find book from DB by id: " + id, e);
+        }
+    }
+
+    @Override
+    public List<Book> findAll() {
+        try (EntityManager manager = managerFactory.createEntityManager()) {
+            return manager.createQuery("FROM Book ", Book.class).getResultList();
+        } catch (Exception e) {
+            throw new EntityNotFoundException("Can't find books from DB", e);
         }
     }
 }
