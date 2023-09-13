@@ -1,7 +1,6 @@
 package book.store.repository.impl;
 
 import book.store.exception.DataProcessingException;
-import book.store.exception.EntityNotFoundException;
 import book.store.model.Book;
 import book.store.repository.BookRepository;
 import jakarta.persistence.EntityManager;
