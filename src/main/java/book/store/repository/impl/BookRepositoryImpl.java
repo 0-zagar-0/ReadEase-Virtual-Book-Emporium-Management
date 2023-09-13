@@ -1,5 +1,6 @@
 package book.store.repository.impl;
 
+import book.store.exception.DataProcessingException;
 import book.store.exception.EntityNotFoundException;
 import book.store.model.Book;
 import book.store.repository.BookRepository;
@@ -29,7 +30,7 @@ public class BookRepositoryImpl implements BookRepository {
             if (transaction != null && transaction.isActive()) {
                 transaction.rollback();
             }
-            throw new EntityNotFoundException("Can't save " + book + " to DB", e);
+            throw new DataProcessingException("Can't save " + book + " to DB", e);
         }
         return book;
     }
@@ -39,7 +40,7 @@ public class BookRepositoryImpl implements BookRepository {
         try (EntityManager manager = managerFactory.createEntityManager()) {
             return Optional.ofNullable(manager.find(Book.class, id));
         } catch (Exception e) {
-            throw new EntityNotFoundException("Can't find book from DB by id: " + id, e);
+            throw new DataProcessingException("Can't find book from DB by id: " + id, e);
         }
     }
 
@@ -48,7 +49,7 @@ public class BookRepositoryImpl implements BookRepository {
         try (EntityManager manager = managerFactory.createEntityManager()) {
             return manager.createQuery("FROM Book ", Book.class).getResultList();
         } catch (Exception e) {
-            throw new EntityNotFoundException("Can't find books from DB", e);
+            throw new DataProcessingException("Can't find books from DB", e);
         }
     }
 }
