@@ -42,6 +42,20 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
+    public boolean updateBookById(Long id, CreateBookRequestDto updateDto) {
+        Book book = bookMapper.toModel(updateDto);
+        int udapted = bookRepository
+                .updateBookByIdAndTitleAndAuthorAndIsbnAndPriceAndDescriptionAndCoverImage(id,
+                        book.getTitle(),
+                        book.getAuthor(),
+                        book.getIsbn(),
+                        book.getPrice(),
+                        book.getDescription(),
+                        book.getCoverImage());
+        return udapted > 0;
+    }
+
+    @Override
     public void deleteBookById(Long id) {
         bookRepository.deleteById(id);
     }
