@@ -47,8 +47,8 @@ public class BookController {
 
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    boolean updateBookById(@PathVariable Long id, @RequestBody CreateBookRequestDto requestDto) {
-        return bookService.updateBookById(id, requestDto);
+    void updateBookById(@PathVariable Long id, @RequestBody CreateBookRequestDto requestDto) {
+        bookService.updateBookById(id, requestDto);
     }
 
     @GetMapping("/search")
