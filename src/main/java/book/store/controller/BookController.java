@@ -52,7 +52,7 @@ public class BookController {
     }
 
     @GetMapping("/search")
-    public List<BookDto> search(BookSearchParametersDto parametersDto) {
-        return bookService.search(parametersDto);
+    public List<BookDto> searchBooks(BookSearchParametersDto parametersDto) {
+        return bookService.searchBooks(parametersDto);
     }
 }
