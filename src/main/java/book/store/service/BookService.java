@@ -5,7 +5,7 @@ import book.store.dto.BookSearchParametersDto;
 import book.store.dto.CreateBookRequestDto;
 import java.util.List;
 import org.springframework.data.domain.Pageable;
-class
+
 public interface BookService {
     BookDto save(CreateBookRequestDto book);
 
