@@ -1,6 +1,6 @@
 package book.store.repository.book;
 
-import book.store.dto.BookSearchParametersDto;
+import book.store.dto.book.BookSearchParametersDto;
 import book.store.model.Book;
 import book.store.repository.SpecificationBuilder;
 import book.store.repository.SpecificationProviderManager;
@@ -18,19 +18,19 @@ public class BookSpecificationBuilder implements
     public Specification<Book> build(BookSearchParametersDto searchParameters) {
         Specification<Book> specification = Specification.where(null);
 
-        if (searchParameters.getAuthors() != null && searchParameters.getAuthors().length > 0) {
+        if (searchParameters.authors() != null && searchParameters.authors().length > 0) {
             specification = specification.and(providerManager.getSpecificationProvider("author")
-                    .getSpecification(searchParameters.getAuthors()));
+                    .getSpecification(searchParameters.authors()));
         }
 
-        if (searchParameters.getTitles() != null && searchParameters.getTitles().length > 0) {
+        if (searchParameters.titles() != null && searchParameters.titles().length > 0) {
             specification = specification.and(providerManager.getSpecificationProvider("title")
-                    .getSpecification(searchParameters.getTitles()));
+                    .getSpecification(searchParameters.titles()));
         }
 
-        if (searchParameters.getPrices() != null && searchParameters.getPrices().length > 0) {
+        if (searchParameters.prices() != null && searchParameters.prices().length > 0) {
             specification = specification.and(providerManager.getSpecificationProvider("price")
-                    .getSpecification(searchParameters.getPrices()));
+                    .getSpecification(searchParameters.prices()));
         }
         return specification;
     }
