@@ -61,7 +61,7 @@ public class CategoryServiceImpl implements CategoryService {
             throw new EntityNotFoundException("Can't find category by id: " + id);
         }
 
-        return bookRepository.findAllByCategoryId(id).stream()
+        return bookRepository.findAllByCategoriesId(id).stream()
                 .map(bookMapper::toDtoWithoutCategories)
                 .toList();
     }

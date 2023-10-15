@@ -9,13 +9,11 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 public interface BookRepository extends JpaRepository<Book, Long>, JpaSpecificationExecutor<Book> {
     @EntityGraph(attributePaths = "categories")
-    @Query("SELECT b FROM Book b JOIN FETCH b.categories c WHERE c.id = :id")
-    List<Book> findAllByCategoryId(@Param("id") Long id);
+    List<Book> findAllByCategoriesId(@Param("id") Long id);
 
     @EntityGraph(attributePaths = "categories")
     Optional<Book> findById(Long id);
