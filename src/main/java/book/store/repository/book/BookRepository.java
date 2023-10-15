@@ -9,11 +9,10 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
-import org.springframework.data.repository.query.Param;
 
 public interface BookRepository extends JpaRepository<Book, Long>, JpaSpecificationExecutor<Book> {
     @EntityGraph(attributePaths = "categories")
-    List<Book> findAllByCategoriesId(@Param("id") Long id);
+    List<Book> findAllByCategoriesId(Long id);
 
     @EntityGraph(attributePaths = "categories")
     Optional<Book> findById(Long id);
