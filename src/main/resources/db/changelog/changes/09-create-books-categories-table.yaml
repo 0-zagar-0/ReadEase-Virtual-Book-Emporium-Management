@@ -1,0 +1,24 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-books-categories-table
+      author: zagar
+      changes:
+        - createTable:
+            tableName: books_categories
+            columns:
+              - column:
+                  name: book_id
+                  type: bigint
+                  constraints:
+                    foreignKeyName: fk_books_categories_books
+                    references: books(id)
+                    nullable: false
+                    deleteCascade: false
+              - column:
+                  name: category_id
+                  type: bigint
+                  constraints:
+                    foreignKeyName: fk_books_categories_categories
+                    references: categories(id)
+                    nullable: false
+                    deleteCascade: false

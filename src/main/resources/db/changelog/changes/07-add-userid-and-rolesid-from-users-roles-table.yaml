@@ -1,0 +1,16 @@
+databaseChangeLog:
+  - changeSet:
+      id: 07-add-userid-and-rolesid-from-users-roles-table.yaml
+      author: zagar
+      changes:
+        - insert:
+            tableName: users_roles
+            columns:
+              - column: {name: "user_id", valueNumeric: 1}
+              - column: {name: "role_id", valueNumeric: 1}
+        - insert:
+            tableName: users_roles
+            columns:
+              - column: { name: "user_id", valueNumeric: 2 }
+              - column: { name: "role_id", valueNumeric: 2 }
+

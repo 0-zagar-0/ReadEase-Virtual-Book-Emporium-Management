@@ -1,0 +1,24 @@
+databaseChangeLog:
+  - changeSet:
+      id: add-users-to-users-table
+      author: zagar
+      changes:
+        - insert:
+            tableName: users
+            columns:
+              - column: {name: "email", value: "user@example.com"}
+              - column: {name: "password", value: "$2a$10$wxfbBVQ4SKfPSisXYYfdd.vZTq2zuqhE204XMBe.jJpfTv.h.LpDG"}
+              - column: {name: "first_name", value: "Admin"}
+              - column: {name: "last_name", value: "Admin"}
+              - column: {name: "shipping_address", value: "23 Main St, City, Country"}
+        - insert:
+            tableName: users
+            columns:
+              - column: { name: "email", value: "admin@example.com" }
+              - column: { name: "password", value: "$2a$10$ZukhsAz5whFb1Gr1Sxv/1uBCGkHWANfRDbndHAr7HyenNjL5v7Y5K" }
+              - column: { name: "first_name", value: "Admin" }
+              - column: { name: "last_name", value: "Admin" }
+              - column: { name: "shipping_address", value: "23 Main St, City, Country" }
+
+
+
