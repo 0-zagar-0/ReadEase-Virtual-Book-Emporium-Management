@@ -1,10 +1,10 @@
 databaseChangeLog:
   - changeSet:
-      id: create-users-table
+      id: create-order-items-table
       author: zagar
       changes:
         - createTable:
-            tableName: users
+            tableName: order_items
             columns:
               - column:
                   name: id
@@ -14,29 +14,29 @@ databaseChangeLog:
                     primaryKey: true
                     nullable: false
               - column:
-                  name: email
-                  type: varchar(255)
-                  constraints:
-                    unique: true
-                    nullable: false
-              - column:
-                  name: password
-                  type: varchar(255)
+                  name: order_id
+                  type: bigint
                   constraints:
                     nullable: false
+                    foreignKeyName: fk_order_items_orders
+                    referencedTableName: orders
+                    referencedColumnNames: id
               - column:
-                  name: first_name
-                  type: varchar(255)
+                  name: book_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_order_items_books
+                    referencedTableName: books
+                    referencedColumnNames: id
+              - column:
+                  name: quantity
+                  type: integer
                   constraints:
                     nullable: false
               - column:
-                  name: last_name
-                  type: varchar(255)
-                  constraints:
-                    nullable: false
-              - column:
-                  name: shipping_address
-                  type: varchar(255)
+                  name: price
+                  type: decimal
                   constraints:
                     nullable: false
               - column:
