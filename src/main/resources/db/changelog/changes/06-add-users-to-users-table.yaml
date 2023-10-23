@@ -19,6 +19,3 @@ databaseChangeLog:
               - column: { name: "first_name", value: "Admin" }
               - column: { name: "last_name", value: "Admin" }
               - column: { name: "shipping_address", value: "23 Main St, City, Country" }
-
-
-

@@ -1,26 +1,26 @@
 databaseChangeLog:
   - changeSet:
-      id: create-carts-cart-items-table
+      id: create-orders-order-items-table
       author: zagar
       changes:
         - createTable:
-            tableName: carts_cart_items
+            tableName: orders_order_items
             columns:
               - column:
-                  name: cart_id
+                  name: order_id
                   type: bigint
                   constraints:
-                    foreignKeyName: fk_carts_cart_items_cart
-                    referencedTableName: carts
+                    foreignKeyName: fk_orders_order_items_order
+                    referencedTableName: orders
                     referencedColumnNames: id
                     nullable: false
                     deleteCascade: false
               - column:
-                  name: cart_item_id
+                  name: order_item_id
                   type: bigint
                   constraints:
-                    foreignKeyName: fk_carts_cart_items_cart_items
-                    referencedTableName: cart_items
+                    foreignKeyName: fk_orders_order_items_item
+                    referencedTableName: order_items
                     referencedColumnNames: id
                     nullable: false
                     deleteCascade: false
