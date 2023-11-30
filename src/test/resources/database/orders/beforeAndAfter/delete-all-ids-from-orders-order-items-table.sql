@@ -1,0 +1,1 @@
+DELETE FROM orders_order_items;

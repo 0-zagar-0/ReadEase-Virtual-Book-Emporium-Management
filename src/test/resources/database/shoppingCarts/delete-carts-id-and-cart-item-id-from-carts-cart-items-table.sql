@@ -1,0 +1,1 @@
+DELETE FROM carts_cart_items WHERE cart_item_id = 3;

@@ -49,7 +49,7 @@ public class OrderController {
     @PatchMapping("/{id}")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @Operation(summary = "Update status", description = "Update order status")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @ResponseStatus(HttpStatus.OK)
     public void updateStatusById(@PathVariable Long id, @RequestBody OrderUpdateStatusDto request) {
         orderService.updateOrderStatus(id, request);
     }
@@ -58,7 +58,8 @@ public class OrderController {
     @PreAuthorize("hasRole('ROLE_USER')")
     @Operation(summary = "Get all items", description = "Get list items from order id")
     @ResponseStatus(HttpStatus.OK)
-    public List<OrderItemResponseDto> getAllOrderItems(Pageable pageable, @PathVariable Long id) {
+    public List<OrderItemResponseDto> getAllOrderItemsByOrderId(
+            Pageable pageable, @PathVariable Long id) {
         return orderItemService.getAllByOrderId(pageable, id);
     }
 

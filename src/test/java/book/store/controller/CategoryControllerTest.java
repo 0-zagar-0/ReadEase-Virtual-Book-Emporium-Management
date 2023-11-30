@@ -53,6 +53,7 @@ class CategoryControllerTest {
                 .webAppContextSetup(applicationContext)
                 .apply(springSecurity())
                 .build();
+        teardown(dataSource);
 
         try (Connection connection = dataSource.getConnection()) {
             connection.setAutoCommit(true);
@@ -75,6 +76,7 @@ class CategoryControllerTest {
     @SneakyThrows
     static void teardown(DataSource dataSource) {
         try (Connection connection = dataSource.getConnection()) {
+            connection.setAutoCommit(true);
             ScriptUtils.executeSqlScript(
                     connection,
                     new ClassPathResource(

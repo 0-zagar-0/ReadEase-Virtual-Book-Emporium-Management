@@ -1,9 +1,9 @@
 package book.store.dto.order;
 
 import jakarta.validation.constraints.NotEmpty;
-import lombok.Getter;
+import lombok.Data;
 
-@Getter
+@Data
 public class OrderRequestDto {
     @NotEmpty
     private String shippingAddress;

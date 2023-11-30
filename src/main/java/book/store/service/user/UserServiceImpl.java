@@ -2,6 +2,7 @@ package book.store.service.user;
 
 import book.store.dto.user.request.UserRegisterRequestDto;
 import book.store.dto.user.response.UserResponseDto;
+import book.store.exception.AuthenticationException;
 import book.store.exception.EntityNotFoundException;
 import book.store.exception.RegistrationException;
 import book.store.mapper.UserMapper;
@@ -45,6 +46,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public User getAuthenticatedUser() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        if (authentication == null) {
+            throw new AuthenticationException("Unable to find authenticated user");
+        }
+
         return userRepository.findByEmail(authentication.getName()).orElseThrow(
                 () -> new EntityNotFoundException(
                         "Can't find user by user name: " + authentication.getName()
