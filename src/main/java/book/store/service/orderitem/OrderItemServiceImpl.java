@@ -27,6 +27,9 @@ public class OrderItemServiceImpl implements OrderItemService {
 
     @Override
     public List<OrderItemResponseDto> getAllByOrderId(Pageable pageable, Long orderId) {
+        if (!orderItemRepository.existsById(orderId)) {
+            throw new EntityNotFoundException("Can't find order by id: " + orderId);
+        }
         return orderItemRepository.findAllByOrderId(pageable, orderId).stream()
                 .map(orderItemMapper::toDto)
                 .collect(Collectors.toList());
@@ -36,8 +39,7 @@ public class OrderItemServiceImpl implements OrderItemService {
     public OrderItemResponseDto getByOrderIdAndItemId(Long orderId, Long itemId) {
         OrderItem orderItem = orderItemRepository.findByOrderIdAndId(orderId, itemId).orElseThrow(
                 () -> new EntityNotFoundException("Can't find order item by order id: "
-                        + orderId + ", and item id: " + itemId)
-        );
+                        + orderId + ", and item id: " + itemId));
         return orderItemMapper.toDto(orderItem);
     }
 }

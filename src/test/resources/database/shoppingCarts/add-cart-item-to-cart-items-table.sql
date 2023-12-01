@@ -1,0 +1,1 @@
+INSERT INTO cart_items (id, book_id, quantity) VALUES (3, 3, 1);
