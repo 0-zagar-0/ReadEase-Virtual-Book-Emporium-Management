@@ -316,5 +316,9 @@ The entity element of the order represents information about the book and is con
             </tr>
         </table>    
     </div>
+    <div>
+        <h1>The video shows how the application works</h1>
+        <a href="https://www.loom.com/share/b4da68e0c34d48c3bfed4d3a59df77ba?sid=f7e0d86c-8070-453b-8ddb-79e467637f22">Watch video loom </a>
+    </div>
 </body>
 
