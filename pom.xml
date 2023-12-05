@@ -150,6 +150,12 @@
             <artifactId>mysql</artifactId>
             <version>${testconteiners.version}</version>
         </dependency>
+
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-common</artifactId>
+            <version>1.6.15</version>
+        </dependency>
     </dependencies>
 
     <dependencyManagement>
