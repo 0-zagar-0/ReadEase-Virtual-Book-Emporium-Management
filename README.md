@@ -2,7 +2,7 @@
     <header>
         <img src="icons/bookstore.png" style="height: 150px; width: 800px; display: block; margin: auto" alt="book logo">
         <h1 style="position: absolute; top: 10px; left: 50%; transform: translate(-50%); color: black;">
-            Online book store
+            ReadEase: Virtual Book Emporium Management
         </h1>
         <p style="text-align: center">
             Greetings to the digital book emporium administration platform! Our system promises a seamless journey for both purchasers and overseers. 
